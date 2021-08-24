@@ -1,10 +1,8 @@
 FROM node:lts-alpine
- 
+
 WORKDIR /app
+COPY . .
+RUN npm install 
 
-COPY ./todoList/package*.json ./
-RUN npm install
+CMD [ "" ]
 
-COPY ./todoList .
-
-CMD ["npm", "run", "serve"]
