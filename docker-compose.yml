@@ -1,10 +1,13 @@
 version: '3'
 
 services:
-  container1:
-    build:
-      context: .
-      dockerfile: ./todoList/Dockerfile
+  vue:
+    build: ./todoList
+    command: npm run serve
     ports: 
       - 4000:8080
-      
+  storybook:
+    build: ./todoList
+    command: npm run storybook
+    ports: 
+      - 5000:6006
