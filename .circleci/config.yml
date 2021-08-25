@@ -8,15 +8,19 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.12.0
-    working_directory: ~/storybook/todoList
+    working_directory: ~/storybook
     steps:
       - checkout
+
+  npminstall:
+    working_directory: ~/storybook/todoList
+      steps:
       - run: 
           name: Datasetup
           command: npm install
-      - run:
-          name: test
-          command: npm run test:unit
+      # - run:
+      #     name: test
+      #     command: npm run test:unit
 
   # test:
   #   working_directory: ~/storybook/todoList
@@ -33,6 +37,9 @@ workflows:
   setup_and_test:
     jobs:
       - build
+      - npminstall
+        requires:
+          - build
       # - test:
       #     requires:
       #       - build
