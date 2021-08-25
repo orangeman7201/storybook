@@ -1,26 +1,19 @@
 # This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
 version: 2.1
 
-orbs:
-  node: circleci/node@4.7.0
+# orbs:
+#   node: circleci/node@4.7.0
 
 jobs:
-  setup:
+  build:
     docker:
       - image: circleci/node:lts-alpine
-    working_directory: ~/storybook/todoList
+    working_directory: ~/storybook
     steps:
-      - checkout:
-          path: ~/storybook
+      - checkout
       - run: 
-        name: Datasetup
-        command: npm install
-
-  test:
-    working_directory: ~/storybook/todoList
-    steps:
-      - checkout:
-          path: ~/storybook
+          name: cd
+          command: cd todoList
       - run: 
           name: Datasetup
           command: npm install
@@ -28,14 +21,24 @@ jobs:
           name: test
           command: npm run test:unit
 
+  # test:
+  #   working_directory: ~/storybook/todoList
+  #   steps:
+  #     - checkout:
+  #         path: ~/storybook
+  #     - run: 
+  #         name: Datasetup
+  #         command: npm install
+
+
 workflows:
   version: 2.1
   setup_and_test:
     jobs:
-      - setup
-      - test:
-          requires:
-            - setup
+      - build
+      # - test:
+      #     requires:
+      #       - build
           # This is the node version to use for the `cimg/node` tag
           # Relevant tags can be found on the CircleCI Developer Hub
           # https://circleci.com/developer/images/image/cimg/node
