@@ -12,9 +12,6 @@ jobs:
     steps:
       - checkout
       - run: 
-          name: cd
-          command: cd todoList
-      - run: 
           name: Datasetup
           command: npm install
       - run:
